@@ -1,0 +1,13 @@
+[Unit]
+Description=Honeycomb log tailer honeytail - %i
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/honeytail -c /etc/honeytail/conf.d/%i.conf
+KillMode=process
+Restart=on-failure
+User=honeycomb
+Group=honeycomb
+
+[Install]
+WantedBy=multi-user.target
