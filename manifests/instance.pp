@@ -35,14 +35,15 @@ define honeytail::instance (
   $defaults = {
     'path'    => "/etc/honeytail/conf.d/${name}.conf",
     'before'  => "Service[honeytail@${name}]",
-    'require' => 'Package[honeytail]'
+    'require' => 'File[/etc/honeytail/conf.d/]'
   }
 
   create_ini_settings($config, $defaults)
 
   # service
   service {"honeytail@${name}":
-    ensure => $ensure,
-    enable => $enable
+    ensure  => $ensure,
+    enable  => $enable,
+    require => 'Systemd::Unit_file[honeytail@.service]'
   }
 }
