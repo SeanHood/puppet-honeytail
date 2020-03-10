@@ -35,7 +35,7 @@ define honeytail::instance (
   $defaults = {
     'path'    => "/etc/honeytail/conf.d/${name}.conf",
     'before'  => "Service[honeytail@${name}]",
-    'require' => 'Class[honeytail]'
+    'require' => 'Package[honeytail]'
   }
 
   create_ini_settings($config, $defaults)
