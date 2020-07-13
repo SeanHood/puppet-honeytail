@@ -7,3 +7,7 @@ fixtures:
     inifile: "puppetlabs/inifile"
     systemd: "camptocamp/systemd"
     archive: "puppet/archive"
+  repositories:
+    provision: 'https://github.com/puppetlabs/provision.git'
+    puppet_agent: 'https://github.com/puppetlabs/puppetlabs-puppet_agent.git'
+    facts: 'https://github.com/puppetlabs/puppetlabs-facts.git'
