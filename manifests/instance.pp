@@ -34,7 +34,7 @@ define honeytail::instance (
   # inifile
   $defaults = {
     'path'    => "/etc/honeytail/conf.d/${name}.conf",
-    'before'  => "Service[honeytail@${name}]",
+    'notify'  => "Service[honeytail@${name}]",
     'require' => 'File[/etc/honeytail/conf.d/]'
   }
 
