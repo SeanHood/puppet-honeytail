@@ -1,0 +1,4 @@
+---
+release_checks:
+  provisioner: docker
+  images: ['litmusimage/centos:7']

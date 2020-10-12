@@ -29,34 +29,10 @@ describe 'honeytail::instance' do
 
         it { is_expected.to compile }
 
-        it { is_expected.to have_ini_setting_resource_count(4) }
-
         it {
-          is_expected.to contain_ini_setting('/etc/honeytail/conf.d/mysql.conf [Required Options] ParserName').with(
-            ensure: 'present',
-            section: 'Required Options',
-            setting: 'ParserName',
-            value: 'mysql',
-            path: '/etc/honeytail/conf.d/mysql.conf',
-          )
-        }
-
-        it {
-          is_expected.to contain_ini_setting('/etc/honeytail/conf.d/mysql.conf [Required Options] WriteKey').with(
-            value: 'REDACTED',
-          )
-        }
-
-        it {
-          is_expected.to contain_ini_setting('/etc/honeytail/conf.d/mysql.conf [Required Options] LogFiles').with(
-            value: '/var/lib/mysql/slow-query.log',
-          )
-        }
-
-        it {
-          is_expected.to contain_ini_setting('/etc/honeytail/conf.d/mysql.conf [Required Options] Dataset').with(
-            value: 'mysql',
-          )
+          is_expected.to contain_file('/etc/honeytail/conf.d/mysql.conf') \
+            .with_content(%r{WriteKey = REDACTED}) \
+            .with_content(%r{Dataset = mysql})
         }
 
         it {

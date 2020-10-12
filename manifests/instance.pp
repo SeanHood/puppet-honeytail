@@ -31,14 +31,18 @@ define honeytail::instance (
   # core
   include ::honeytail
 
-  # inifile
-  $defaults = {
-    'path'    => "/etc/honeytail/conf.d/${name}.conf",
-    'notify'  => "Service[honeytail@${name}]",
-    'require' => 'File[/etc/honeytail/conf.d/]'
+  $settings = {
+    'header'            => "# This file is managed by puppet (${module_name})",
+    'key_val_separator' => ' = ',
+    'quote_char'        => '',
   }
 
-  create_ini_settings($config, $defaults)
+  file {"/etc/honeytail/conf.d/${name}.conf":
+    ensure  => 'present',
+    content => hash2ini($config, $settings),
+    before  => "Service[honeytail@${name}]",
+    require => 'File[/etc/honeytail/conf.d/]'
+  }
 
   # service
   service {"honeytail@${name}":
