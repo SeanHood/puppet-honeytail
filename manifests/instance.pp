@@ -13,14 +13,14 @@
 #     }
 #   }
 #
-#  @param config
+# @param config
 #    The configuration to pass to honeytail. Honeytail uses ini format for it's configuration,
 #    please refer to examples, honeytail docs and puppetlabs-inifile module docs.
 #
-#  @param ensure
+# @param ensure
 #    Whether the instanciated honeytail service should be running. Default value: 'running'
 #
-#  @param enable
+# @param enable
 #    Whether to enable the instanciated honeytail service at boot. Default value: true.
 #
 define honeytail::instance (
