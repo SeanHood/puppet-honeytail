@@ -41,7 +41,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run: echo "::add-path::/home/runner/.gem/ruby/2.5.0/bin"
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
 
     - name: Spec Tests
       uses: puppetlabs/action-litmus_spec@master
