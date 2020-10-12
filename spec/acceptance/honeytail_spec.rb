@@ -72,4 +72,21 @@ describe 'honeytail class' do
       its(:content) { is_expected.not_to match %r{SampleRate} }
     end
   end
+
+  context 'Re-apply manifest without any instance' do
+    it 'Apply Manifest' do
+      manifest = <<-EOS
+          class {'honeytail':
+              direct_download => 'https://honeycomb.io/download/honeytail/linux/honeytail-1.762-1.x86_64.rpm'
+          }
+      EOS
+
+      expect(apply_manifest(manifest).exit_code).not_to eq(1)
+    end
+
+    # SampleRate should be gone from configuration
+    describe file('/etc/honeytail/conf.d/test.conf') do
+      it { is_expected.not_to be_a_file }
+    end
+  end
 end
